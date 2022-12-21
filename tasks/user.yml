@@ -1,0 +1,139 @@
+---
+- name: Download Oh My ZSH installer
+  ansible.builtin.get_url:
+    url: https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: "{{ role_directory }}/user/oh-my-zsh-install.sh"
+    mode: 0755
+
+- name: Create local user accounts as defined in group vars
+  ansible.builtin.user:
+    name: "{{ item }}"
+    shell: /usr/bin/zsh
+    groups: [wheel]
+    append: true
+    generate_ssh_key: true
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+  loop: "{{ base_user }}"
+  when:
+    - base_user is defined
+
+- name: Add keys from group vars to authorized_keys for specified users
+  ansible.posix.authorized_key:
+    user: "{{ item }}"
+    exclusive: true
+    key: "{{ ssh_keys[item] | map(attribute='sshkey') | join('\n') }}"
+  loop: "{{ base_user }}"
+  when:
+    - base_user is defined
+    - ssh_keys is defined
+
+- name: Adding local users to admin group in /etc/sudoers
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    regexp: "{{ item }} ALL"
+    line: "{{ item }} ALL=(ALL) NOPASSWD: ALL"
+    state: present
+    validate: "/usr/sbin/visudo -cf %s"
+  loop: "{{ base_user }}"
+  when:
+    - base_user is defined
+
+- name: Install Oh My ZSH for local users
+  ansible.builtin.command:
+    cmd: "{{ role_directory }}/user/oh-my-zsh-install.sh --unattended"
+    creates: /home/{{ item }}/.oh-my-zsh
+  become: true
+  become_user: "{{ item }}"
+  loop: "{{ base_user }}"
+  when:
+    - base_user is defined
+
+- name: Deploy zsh user configuration for local user
+  ansible.builtin.copy:
+    src: user/zshrc
+    dest: /home/{{ item }}/.zshrc
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0640
+  loop: "{{ base_user }}"
+  when:
+    - base_user is defined
+
+- name: Create .profile.d directory for local user
+  ansible.builtin.file:
+    path: /home/{{ item }}/.profile.d
+    state: directory
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0750
+  loop: "{{ base_user }}"
+  when:
+    - base_user is defined
+
+- name: Deploy alias.plugin.zsh
+  ansible.builtin.copy:
+    src: user/alias.plugin.zsh
+    dest: /home/{{ item }}/.profile.d/alias.plugin.zsh
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0640
+  loop: "{{ base_user }}"
+  when:
+    - base_user is defined
+
+- name: Deploy functions.plugin.zsh
+  ansible.builtin.copy:
+    src: user/functions.plugin.zsh
+    dest: /home/{{ item }}/.profile.d/functions.plugin.zsh
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0640
+  loop: "{{ base_user }}"
+  when:
+    - base_user is defined
+
+- name: Deploy git.plugin.zsh
+  ansible.builtin.copy:
+    src: user/git.plugin.zsh
+    dest: /home/{{ item }}/.profile.d/git.plugin.zsh
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0640
+  loop: "{{ base_user }}"
+  when:
+    - base_user is defined
+
+- name: Deploy ruby.plugin.zsh
+  ansible.builtin.copy:
+    src: user/ruby.plugin.zsh
+    dest: /home/{{ item }}/.profile.d/ruby.plugin.zsh
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0640
+  loop: "{{ base_user }}"
+  when:
+    - base_user is defined
+
+- name: Configure root account
+  ansible.builtin.user:
+    name: root
+    shell: /usr/bin/zsh
+    generate_ssh_key: true
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+
+- name: Install Oh My ZSH for root
+  ansible.builtin.command:
+    cmd: "{{ role_directory }}/user/oh-my-zsh-install.sh --unattended"
+    creates: /root/.oh-my-zsh
+  become: true
+  become_user: root
+
+- name: Deploy zsh user configuration for root
+  ansible.builtin.copy:
+    src: user/zshrc
+    dest: /root/.zshrc
+    owner: root
+    group: root
+    mode: 0640

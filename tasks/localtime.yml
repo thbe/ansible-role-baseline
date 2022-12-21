@@ -1,0 +1,7 @@
+---
+- name: Set timezone to UTC
+  ansible.builtin.file:
+    path: /etc/localtime
+    src: /usr/share/zoneinfo/UTC
+    state: link
+    force: true

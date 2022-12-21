@@ -1,0 +1,4 @@
+---
+# handlers file for baseline
+- name: Reload firewalld
+  ansible.builtin.command: firewall-cmd --reload

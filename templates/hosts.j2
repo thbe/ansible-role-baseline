@@ -1,0 +1,18 @@
+# Ansible managed hosts file
+
+# Localhost
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+# Hosts managed by Ansible
+{% for host in groups['all'] %}
+{% if hostvars[host]['ansible_facts']['distribution'] is defined %}
+{{ hostvars[host]['ansible_facts']['default_ipv4']['address'] }}  {{ hostvars[host]['ansible_facts']['hostname'] }}.{{ net_domain }} {{ hostvars[host]['ansible_facts']['hostname'] }}
+{% endif %}
+{% endfor %}
+
+{% if hosts_aliases is defined %}
+{% for alias in hosts_aliases %}
+{{ alias }}
+{% endfor %}
+{% endif %}

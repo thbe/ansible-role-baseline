@@ -1,0 +1,39 @@
+---
+- name: Remove content from /etc/motd
+  ansible.builtin.copy:
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: 0644
+    content: ''
+
+- name: Deploy motd snippets to /etc/motd.d
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /etc/motd.d
+    owner: root
+    group: root
+    mode: 0644
+  with_fileglob:
+    - motd.d/*
+
+- name: Deploy issue snippets to /etc/issue.d
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /etc/issue.d
+    owner: root
+    group: root
+    mode: 0644
+  with_fileglob:
+    - motd.d/*
+
+- name: Update Ansible facts
+  ansible.builtin.setup:
+
+- name: Deploy motd snippet with system information to /etc/motd.d
+  ansible.builtin.template:
+    src: motd_baseline.j2
+    dest: /etc/motd.d/system_information
+    owner: root
+    group: root
+    mode: 0644

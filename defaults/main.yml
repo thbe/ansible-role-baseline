@@ -1,0 +1,44 @@
+---
+# defaults file for baseline
+role_directory: /opt/ansible/baseline
+
+base_packages:
+  - atop
+  - bmon
+  - cifs-utils
+  - dstat
+  - fdupes
+  - genisoimage
+  - git
+  - htop
+  - iftop
+  - iotop
+  - ncdu
+  - nethogs
+  - mtr
+  - nfs-utils
+  - nmap
+  - nmon
+  - nmstate
+  - perf
+  - pv
+  - python3-devel
+  - python3-psutil
+  - psacct
+  - rng-tools
+  - rsync
+  - screen
+  - sudo
+  - strace
+  - tlog
+  - tree
+  - unzip
+  - vim-enhanced
+  - wget
+  - xorg-x11-xauth
+  - zsh
+
+base_packages_x86_64:
+  - "{{ role_directory }}/rpms/detox-1.3.0-10.el8.x86_64.rpm"
+  - bonnie++
+  - syslinux

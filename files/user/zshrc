@@ -1,0 +1,64 @@
+# zsh configuration file
+#
+# Author: Thomas Bendler <code@thbe.org>
+# Date:   So 21 Nov 2021 22:39:46 CET
+#
+
+# Add local sbin to $PATH.
+export PATH="/usr/local/sbin:${PATH}"
+
+# Path to the oh-my-zsh installation.
+export ZSH="${HOME}/.oh-my-zsh"
+
+# Use case-sensitive completion.
+CASE_SENSITIVE="true"
+
+# Define how often to auto-update (in days).
+export UPDATE_ZSH_DAYS=7
+
+# Enable command auto-correction.
+ENABLE_CORRECTION="true"
+
+# Display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Configure history
+HIST_STAMPS="yyyy-mm-dd"
+HISTSIZE=20000
+SAVEHIST=20000
+setopt histignorespace
+setopt hist_ignore_all_dups
+setopt append_history
+setopt share_history
+
+# Plugin configuration
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+  ansible
+  bundler
+  colored-man-pages
+  colorize
+  common-aliases
+  debian
+  docker
+  git
+  kubectl
+  nmap
+  zsh-navigation-tools
+)
+
+ZSH_THEME="gentoo"
+
+# Load zsh extensions
+[ -e /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[ -e /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Load oh-my-zsh framework
+[ -e ${ZSH}/oh-my-zsh.sh ] && source ${ZSH}/oh-my-zsh.sh
+
+# Load profile snippets
+[ -e ${HOME}/.profile.d/ruby.plugin.zsh ] && source ${HOME}/.profile.d/ruby.plugin.zsh
+[ -e ${HOME}/.profile.d/alias.plugin.zsh ] && source ${HOME}/.profile.d/alias.plugin.zsh
+[ -e ${HOME}/.profile.d/git.plugin.zsh ] && source ${HOME}/.profile.d/git.plugin.zsh

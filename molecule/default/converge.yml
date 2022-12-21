@@ -1,0 +1,19 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - ansible.posix
+  tasks:
+    - name: "Include thbe.common"
+      ansible.builtin.include_role:
+        name: "thbe.common"
+    - name: "Include thbe.baseline"
+      ansible.builtin.include_role:
+        name: "thbe.baseline"
+      vars:
+        base_user:
+          - test1
+        ssh_keys:
+          test1:
+            - name: Test User 1
+              sshkey: 'ssh-rsa AAAA...fKYffH test1@host1'

@@ -1,0 +1,39 @@
+Welcome to {{ ansible_fqdn }}!
+
+System:
+  - Vendor:                    {{ ansible_system_vendor }}
+  - Model:                     {{ ansible_product_name }}
+  - Serial:                    {{ ansible_product_serial }}
+
+Distribution:
+  - Family:                    {{ ansible_os_family }}
+  - Version:                   {{ ansible_distribution_version }}
+  - Release:                   {{ ansible_distribution_release }}
+
+Architecture:                  {{ ansible_architecture }}
+Kernel:                        {{ ansible_kernel }}
+
+Network:
+  - Interface:                 {{ ansible_default_ipv4.interface }}
+  - Macaddress:                {{ ansible_default_ipv4.macaddress }}
+
+IPv4:
+  - Address:                   {{ ansible_default_ipv4.address }}
+  - Gateway:                   {{ ansible_default_ipv4.gateway }}
+  - Netmask:                   {{ ansible_default_ipv4.netmask }}
+
+SELinux:                       {{ ansible_selinux.status }}
+
+vCPUs:                         {{ ansible_processor_vcpus }}
+Memory:                        {{ ansible_memtotal_mb }} MB
+
+{{ "%-30s" | format("Device") }} {{ "%-45s" | format("Mount") }} {{ "%-8s" | format("FS") }} {{ "%-11s" | format("Total") }}
+{% for item in ansible_mounts %}
+{% if "nfs" not in item.fstype %}
+{{ "%-30s" | format(item.device) }} {{ "%-45s" | format(item.mount) }} {{ "%-8s" | format(item.fstype) }} {{ "%-11s" | format(item.size_total | human_readable(unit="G")) }}
+{% endif %}
+{% endfor %}
+
+Swap:                          {{ ansible_swaptotal_mb }} MB
+
+{# Intentional empty line #}
