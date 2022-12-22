@@ -10,9 +10,13 @@
     name: sysstat
     state: started
     enabled: true
+  when:
+    - ansible_facts['virtualization_type'] != "docker"
 
 - name: Enable and start sysstat-collect timer
   ansible.builtin.service:
     name: sysstat-collect.timer
     state: started
     enabled: true
+  when:
+    - ansible_facts['virtualization_type'] != "docker"

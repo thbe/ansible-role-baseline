@@ -1,5 +1,4 @@
 ---
-# tasks file for baseline
 - name: Create base folder structure
   ansible.builtin.import_tasks: folder.yml
 
