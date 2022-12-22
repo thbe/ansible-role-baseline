@@ -13,6 +13,7 @@
         "fdupes",
         "genisoimage",
         "github",
+        "gofrolist",
         "hostnames",
         "hostvars",
         "iftop",
