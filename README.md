@@ -16,7 +16,10 @@ This role does not have any requirements.
 
 ## Dependencies
 
-This role depends on the "thbe.common" role from Ansible Galaxy.
+This role depends on:
+
+* thbe.common
+* thbe.rhel
 
 ## Example Playbook
 
