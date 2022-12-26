@@ -1,7 +1,6 @@
 ---
 dependencies:
   - role: thbe.common
-  - role: thbe.rhel
 
 galaxy_info:
   role_name: baseline
