@@ -13,6 +13,7 @@ Distribution:
 Architecture:                  {{ ansible_architecture }}
 Kernel:                        {{ ansible_kernel }}
 
+{% if "docker" not in ansible_virtualization_type %}
 Network:
   - Interface:                 {{ ansible_default_ipv4.interface }}
   - Macaddress:                {{ ansible_default_ipv4.macaddress }}
@@ -23,6 +24,7 @@ IPv4:
   - Netmask:                   {{ ansible_default_ipv4.netmask }}
 
 SELinux:                       {{ ansible_selinux.status }}
+{% endif %}
 
 vCPUs:                         {{ ansible_processor_vcpus }}
 Memory:                        {{ ansible_memtotal_mb }} MB

@@ -17,18 +17,12 @@
 
 - name: Deploy global hosts configuration
   ansible.builtin.import_tasks: hosts.yml
-  when:
-    - ansible_facts['virtualization_type'] != "docker"
 
 - name: Deploy customized message of the day
   ansible.builtin.import_tasks: motd.yml
-  when:
-    - ansible_facts['virtualization_type'] != "docker"
 
 - name: Deploy standard local firewall configuration
   ansible.builtin.import_tasks: firewall.yml
-  when:
-    - ansible_facts['virtualization_type'] != "docker"
 
 - name: Deploy user settings
   ansible.builtin.import_tasks: user.yml

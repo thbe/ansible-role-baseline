@@ -1,12 +1,16 @@
 ---
 - name: Converge
   hosts: all
+  gather_facts: true
   collections:
     - ansible.posix
   tasks:
     - name: "Include thbe.common"
       ansible.builtin.include_role:
         name: "thbe.common"
+    - name: "Include thbe.rhel"
+      ansible.builtin.include_role:
+        name: "thbe.rhel"
     - name: "Include thbe.baseline"
       ansible.builtin.include_role:
         name: "thbe.baseline"
