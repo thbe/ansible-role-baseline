@@ -39,6 +39,5 @@ base_packages:
   - zsh
 
 base_packages_x86_64:
-  - "{{ role_directory }}/rpms/detox-1.3.0-10.el8.x86_64.rpm"
   - bonnie++
   - syslinux
