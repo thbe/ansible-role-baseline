@@ -39,5 +39,4 @@ base_packages:
   - zsh
 
 base_packages_x86_64:
-  - bonnie++
   - syslinux

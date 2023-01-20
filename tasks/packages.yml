@@ -17,8 +17,3 @@
     - ansible_facts['architecture'] == "x86_64"
     - ansible_facts['os_family'] == "RedHat"
     - ansible_facts['distribution_major_version']|int >= 8
-
-- name: Installation of Python packages with pip
-  ansible.builtin.pip:
-    name:
-      - glances
