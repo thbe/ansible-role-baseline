@@ -8,6 +8,11 @@
     - name: "Include thbe.common"
       ansible.builtin.include_role:
         name: "thbe.common"
+    - name: "Include thbe.rhel"
+      ansible.builtin.include_role:
+        name: "thbe.rhel"
+      vars:
+        external_repos_epel: true
     - name: "Include thbe.baseline"
       ansible.builtin.include_role:
         name: "thbe.baseline"

@@ -37,6 +37,3 @@ base_packages:
   - wget
   - xorg-x11-xauth
   - zsh
-
-base_packages_x86_64:
-  - syslinux
