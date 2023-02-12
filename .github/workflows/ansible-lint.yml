@@ -22,6 +22,6 @@ jobs:
           packages: |
             ansible
             jinja2
-            ansible-lint
+            ansible-lint == 6.10.0
       - run: "ansible-lint -v --force-color"
         working-directory: ${{ github.workspace }}

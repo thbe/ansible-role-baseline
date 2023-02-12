@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: true
   collections:
-    - ansible.posix
+    ansible.posix
   tasks:
     - name: "Include thbe.common"
       ansible.builtin.include_role:
