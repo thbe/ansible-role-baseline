@@ -20,8 +20,8 @@ jobs:
         uses: BSFishy/pip-action@v1
         with:
           packages: |
-            ansible==6.4.0
-            jinja2>=3.0.0
+            ansible
+            jinja2
             ansible-lint
       - run: "ansible-lint -v --force-color"
         working-directory: ${{ github.workspace }}
