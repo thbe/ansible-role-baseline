@@ -33,11 +33,11 @@ setopt share_history
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  {% if zsh_plugins is defined %}
-  {% for plugin in zsh_plugins %}
+{% if zsh_plugins is defined %}
+{% for plugin in zsh_plugins %}
   {{ plugin }}
-  {% endfor %}
-  {% endif %}
+{% endfor %}
+{% endif %}
 )
 
 ZSH_THEME={{ zsh_theme }}

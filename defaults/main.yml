@@ -9,6 +9,7 @@ zsh_plugins:
   - colorize
   - common-aliases
   - git
+  - zsh-autosuggestions
   - zsh-navigation-tools
 
 base_packages:

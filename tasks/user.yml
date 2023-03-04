@@ -49,6 +49,15 @@
   when:
     - base_user is defined
 
+- name: Install plugin zsh-autosuggestions
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions"
+    dest: /home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    version: "v0.7.0"
+  loop: "{{ base_user }}"
+  when:
+    - base_user is defined
+
 - name: Deploy zsh user configuration for local user
   ansible.builtin.template:
     src: zshrc.j2
