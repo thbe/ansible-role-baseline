@@ -58,6 +58,18 @@
   when:
     - base_user is defined
 
+- name: Fix zsh-autosuggestions plugin permissions
+  ansible.builtin.file:
+    path: /home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    state: directory
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0750
+    recurse: true
+  loop: "{{ base_user }}"
+  when:
+    - base_user is defined
+
 - name: Deploy zsh user configuration for local user
   ansible.builtin.template:
     src: zshrc.j2
