@@ -11,6 +11,8 @@ This role does not have any requirements.
 ## Role Variables
 
 * **role_directory** - This variable contains the root path of the directories used by thbe roles (**do not change!**)
+* **zsh_theme** - Set oh-my-zsh theme (default: "gentoo")
+* **zsh_plugins** - List of oh-my-zsh plugins
 * **base_packages** - List of baseline packages
 * **base_packages_x86_64** - List of baseline packages for x86_64
 

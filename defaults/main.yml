@@ -2,6 +2,15 @@
 # defaults file for baseline
 role_directory: /opt/ansible/baseline
 
+zsh_theme: "gentoo"
+zsh_plugins:
+  - ansible
+  - colored-man-pages
+  - colorize
+  - common-aliases
+  - git
+  - zsh-navigation-tools
+
 base_packages:
   - atop
   - bmon
