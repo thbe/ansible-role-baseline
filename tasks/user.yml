@@ -49,7 +49,7 @@
   when:
     - base_user is defined
 
-- name: Create custom plugin directory zsh-autosuggestions for local user
+- name: Create custom plugin directory zsh-autosuggestions for local users
   ansible.builtin.file:
     path: /home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
     state: directory
@@ -71,7 +71,18 @@
   when:
     - base_user is defined
 
-- name: Deploy zsh user configuration for local user
+- name: Install zsh-syntax-highlighting for local users
+  ansible.builtin.copy:
+    src: user/zsh-syntax-highlighting.zsh
+    dest: /home/{{ item }}/.zsh-syntax-highlighting.zsh
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0640
+  loop: "{{ base_user }}"
+  when:
+    - base_user is defined
+
+- name: Deploy zsh user configuration for local users
   ansible.builtin.template:
     src: zshrc.j2
     dest: /home/{{ item }}/.zshrc
@@ -82,7 +93,7 @@
   when:
     - base_user is defined
 
-- name: Create .profile.d directory for local user
+- name: Create .profile.d directory for local users
   ansible.builtin.file:
     path: /home/{{ item }}/.profile.d
     state: directory
@@ -164,6 +175,14 @@
   ansible.builtin.copy:
     src: user/zsh-autosuggestions.zsh
     dest: /root/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Install zsh-syntax-highlighting for root user
+  ansible.builtin.copy:
+    src: user/zsh-syntax-highlighting.zsh
+    dest: /root/.zsh-syntax-highlighting.zsh
     owner: root
     group: root
     mode: 0640

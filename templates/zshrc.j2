@@ -42,14 +42,13 @@ plugins=(
 
 ZSH_THEME={{ zsh_theme }}
 
-# Load zsh extensions
-[ -e /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-[ -e /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Load oh-my-zsh framework
-[ -e ${ZSH}/oh-my-zsh.sh ] && source ${ZSH}/oh-my-zsh.sh
-
 # Load profile snippets
 [ -e ${HOME}/.profile.d/ruby.plugin.zsh ] && source ${HOME}/.profile.d/ruby.plugin.zsh
 [ -e ${HOME}/.profile.d/alias.plugin.zsh ] && source ${HOME}/.profile.d/alias.plugin.zsh
 [ -e ${HOME}/.profile.d/git.plugin.zsh ] && source ${HOME}/.profile.d/git.plugin.zsh
+
+# Load oh-my-zsh framework
+[ -e ${ZSH}/oh-my-zsh.sh ] && source ${ZSH}/oh-my-zsh.sh
+
+# Load zsh extensions
+[ -e ${HOME}/.zsh-syntax-highlighting.zsh ] && source ${HOME}/.zsh-syntax-highlighting.zsh
