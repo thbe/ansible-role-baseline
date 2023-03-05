@@ -50,22 +50,12 @@
     - base_user is defined
 
 - name: Install plugin zsh-autosuggestions for local users
-  ansible.builtin.git:
-    repo: "https://github.com/zsh-users/zsh-autosuggestions"
-    dest: /home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-    version: "v0.7.0"
-  loop: "{{ base_user }}"
-  when:
-    - base_user is defined
-
-- name: Fix zsh-autosuggestions plugin permissions
-  ansible.builtin.file:
-    path: /home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-    state: directory
+  ansible.builtin.copy:
+    src: user/zsh-autosuggestions.zsh
+    dest: /home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
     owner: "{{ item }}"
     group: "{{ item }}"
-    mode: 0750
-    recurse: true
+    mode: 0640
   loop: "{{ base_user }}"
   when:
     - base_user is defined
