@@ -1,6 +1,6 @@
 # Ansible Role thbe-baseline
 
-[![Ansible Lint](https://github.com/thbe/ansible-role-baseline/actions/workflows/ansible-lint.yml/badge.svg?event=push)](https://github.com/thbe/ansible-role-baseline/actions)[![Molecule](https://github.com/thbe/ansible-role-baseline/actions/workflows/molecule.yml/badge.svg?event=push)](https://github.com/thbe/ansible-role-baseline/actions)
+[![Molecule](https://github.com/thbe/ansible-role-baseline/actions/workflows/molecule.yml/badge.svg?event=push)](https://github.com/thbe/ansible-role-baseline/actions)
 
 This role adds everything that makes life as a system administrator easier. It contains my personal set of tools and configurations I use more or less every day.
 
