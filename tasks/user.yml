@@ -5,6 +5,68 @@
     dest: "{{ role_directory }}/user/oh-my-zsh-install.sh"
     mode: 0755
 
+- name: Download zsh-syntax-highlighting
+  ansible.builtin.get_url:
+    url: https://github.com/zsh-users/zsh-syntax-highlighting/archive/refs/tags/0.7.1.tar.gz
+    dest: "{{ role_directory }}/user/zsh-syntax-highlighting.tar.gz"
+    mode: 0755
+
+- name: Create zsh plugin directory
+  ansible.builtin.file:
+    path: /opt/zsh
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name : Deploy zsh-syntax-highlighting
+  ansible.builtin.unarchive:
+    src: "{{ role_directory }}/user/zsh-syntax-highlighting.tar.gz"
+    dest: /opt/zsh/zsh-syntax-highlighting
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Create custom zsh plugin directory
+  ansible.builtin.file:
+    path: /opt/zsh/custom
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Deploy alias.plugin.zsh
+  ansible.builtin.copy:
+    src: user/alias.plugin.zsh
+    dest: /opt/zsh/custom/alias.plugin.zsh
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Deploy functions.plugin.zsh
+  ansible.builtin.copy:
+    src: user/functions.plugin.zsh
+    dest: /opt/zsh/custom/functions.plugin.zsh
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Deploy git.plugin.zsh
+  ansible.builtin.copy:
+    src: user/git.plugin.zsh
+    dest: /opt/zsh/custom/git.plugin.zsh
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Deploy ruby.plugin.zsh
+  ansible.builtin.copy:
+    src: user/ruby.plugin.zsh
+    dest: /opt/zsh/custom/ruby.plugin.zsh
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Create local user accounts as defined in group vars
   ansible.builtin.user:
     name: "{{ item }}"
@@ -71,76 +133,10 @@
   when:
     - base_user is defined
 
-- name: Install zsh-syntax-highlighting for local users
-  ansible.builtin.copy:
-    src: user/zsh-syntax-highlighting.zsh
-    dest: /home/{{ item }}/.zsh-syntax-highlighting.zsh
-    owner: "{{ item }}"
-    group: "{{ item }}"
-    mode: 0640
-  loop: "{{ base_user }}"
-  when:
-    - base_user is defined
-
 - name: Deploy zsh user configuration for local users
   ansible.builtin.template:
     src: zshrc.j2
     dest: /home/{{ item }}/.zshrc
-    owner: "{{ item }}"
-    group: "{{ item }}"
-    mode: 0640
-  loop: "{{ base_user }}"
-  when:
-    - base_user is defined
-
-- name: Create .profile.d directory for local users
-  ansible.builtin.file:
-    path: /home/{{ item }}/.profile.d
-    state: directory
-    owner: "{{ item }}"
-    group: "{{ item }}"
-    mode: 0750
-  loop: "{{ base_user }}"
-  when:
-    - base_user is defined
-
-- name: Deploy alias.plugin.zsh
-  ansible.builtin.copy:
-    src: user/alias.plugin.zsh
-    dest: /home/{{ item }}/.profile.d/alias.plugin.zsh
-    owner: "{{ item }}"
-    group: "{{ item }}"
-    mode: 0640
-  loop: "{{ base_user }}"
-  when:
-    - base_user is defined
-
-- name: Deploy functions.plugin.zsh
-  ansible.builtin.copy:
-    src: user/functions.plugin.zsh
-    dest: /home/{{ item }}/.profile.d/functions.plugin.zsh
-    owner: "{{ item }}"
-    group: "{{ item }}"
-    mode: 0640
-  loop: "{{ base_user }}"
-  when:
-    - base_user is defined
-
-- name: Deploy git.plugin.zsh
-  ansible.builtin.copy:
-    src: user/git.plugin.zsh
-    dest: /home/{{ item }}/.profile.d/git.plugin.zsh
-    owner: "{{ item }}"
-    group: "{{ item }}"
-    mode: 0640
-  loop: "{{ base_user }}"
-  when:
-    - base_user is defined
-
-- name: Deploy ruby.plugin.zsh
-  ansible.builtin.copy:
-    src: user/ruby.plugin.zsh
-    dest: /home/{{ item }}/.profile.d/ruby.plugin.zsh
     owner: "{{ item }}"
     group: "{{ item }}"
     mode: 0640
