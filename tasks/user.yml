@@ -23,6 +23,7 @@
   ansible.builtin.unarchive:
     src: "{{ role_directory }}/user/zsh-syntax-highlighting.tar.gz"
     dest: /opt/zsh/zsh-syntax-highlighting
+    remote_src: yes
     owner: root
     group: root
     mode: 0755
