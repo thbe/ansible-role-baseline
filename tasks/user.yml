@@ -176,14 +176,6 @@
     group: root
     mode: 0640
 
-- name: Install zsh-syntax-highlighting for root user
-  ansible.builtin.copy:
-    src: user/zsh-syntax-highlighting.zsh
-    dest: /root/.zsh-syntax-highlighting.zsh
-    owner: root
-    group: root
-    mode: 0640
-
 - name: Deploy zsh user configuration for root user
   ansible.builtin.template:
     src: zshrc.j2
