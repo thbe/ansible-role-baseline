@@ -13,7 +13,7 @@
 
 - name: Create zsh plugin directory
   ansible.builtin.file:
-    path: /opt/zsh
+    path: /opt/zsh/zsh-syntax-highlighting
     state: directory
     owner: root
     group: root
