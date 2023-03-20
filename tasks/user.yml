@@ -126,7 +126,7 @@
 - name: Install plugin zsh-autosuggestions for local users
   ansible.builtin.copy:
     src: user/zsh-autosuggestions.zsh
-    dest: /home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    dest: /home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
     owner: "{{ item }}"
     group: "{{ item }}"
     mode: 0640
@@ -171,7 +171,7 @@
 - name: Install plugin zsh-autosuggestions for root user
   ansible.builtin.copy:
     src: user/zsh-autosuggestions.zsh
-    dest: /root/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    dest: /root/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
     owner: root
     group: root
     mode: 0640
