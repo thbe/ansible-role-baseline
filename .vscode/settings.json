@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
+        "almalinux",
         "Bendler",
         "blockinfile",
         "bmon",
@@ -7,6 +8,7 @@
         "centos",
         "cgroupns",
         "cifs",
+        "containerd",
         "devel",
         "dhcpv",
         "dstat",
