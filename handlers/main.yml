@@ -1,6 +1,7 @@
 ---
 # handlers file for baseline
 - name: Reload firewalld
-  ansible.builtin.command: firewall-cmd --reload
-  when:
-    - ansible_facts['virtualization_type'] != "docker"
+  ansible.builtin.command:
+    cmd: firewall-cmd --reload
+  register: firewall_reload
+  changed_when: firewall_reload.rc != 0

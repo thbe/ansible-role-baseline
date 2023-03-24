@@ -5,8 +5,6 @@
     permanent: true
     state: enabled
   notify: Reload firewalld
-  when:
-    - ansible_facts['virtualization_type'] != "docker"
 
 - name: Enable standard service dhcpv6-client on local firewall
   ansible.posix.firewalld:
@@ -14,8 +12,6 @@
     permanent: true
     state: enabled
   notify: Reload firewalld
-  when:
-    - ansible_facts['virtualization_type'] != "docker"
 
 - name: Enable standard service samba-client on local firewall
   ansible.posix.firewalld:
@@ -23,8 +19,6 @@
     permanent: true
     state: enabled
   notify: Reload firewalld
-  when:
-    - ansible_facts['virtualization_type'] != "docker"
 
 - name: Activate firewalld logging
   ansible.builtin.lineinfile:
@@ -34,5 +28,3 @@
     create: true
     mode: 0644
   notify: Reload firewalld
-  when:
-    - ansible_facts['virtualization_type'] != "docker"
