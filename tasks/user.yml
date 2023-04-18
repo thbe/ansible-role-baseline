@@ -117,7 +117,7 @@
     path: /home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
     state: directory
     owner: "{{ item }}"
-    group: "{{ item }}"
+    group: "{{ base_group | default({{ item }}) }}"
     mode: 0750
   loop: "{{ base_user }}"
   when:
