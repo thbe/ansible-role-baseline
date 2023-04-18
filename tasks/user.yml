@@ -128,7 +128,7 @@
     src: user/zsh-autosuggestions.zsh
     dest: /home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
     owner: "{{ item }}"
-    group: "{{ item }}"
+    group: "{{ base_group if base_group is defined else item }}"
     mode: 0640
   loop: "{{ base_user }}"
   when:
@@ -139,7 +139,7 @@
     src: zshrc.j2
     dest: /home/{{ item }}/.zshrc
     owner: "{{ item }}"
-    group: "{{ item }}"
+    group: "{{ base_group if base_group is defined else item }}"
     mode: 0640
   loop: "{{ base_user }}"
   when:
