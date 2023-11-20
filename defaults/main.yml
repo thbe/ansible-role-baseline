@@ -15,11 +15,13 @@ zsh_plugins:
 base_packages:
   - atop
   - bmon
+  - btop
   - cifs-utils
   - dstat
   - fdupes
   - genisoimage
   - git
+  - glances
   - htop
   - iftop
   - iotop
