@@ -23,6 +23,8 @@
 
 - name: Deploy standard local firewall configuration
   ansible.builtin.import_tasks: firewall.yml
+  when:
+    - fw_manage|bool
 
 - name: Deploy user settings
   ansible.builtin.import_tasks: user.yml

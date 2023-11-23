@@ -11,6 +11,7 @@ This role does not have any requirements.
 ## Role Variables
 
 * **role_directory** - This variable contains the root path of the directories used by thbe roles (**do not change!**)
+* **fw_manage:** - Manage local firewall (default: true)
 * **zsh_theme** - Set oh-my-zsh theme (default: "gentoo")
 * **zsh_plugins** - List of oh-my-zsh plugins
 * **base_packages** - List of baseline packages
