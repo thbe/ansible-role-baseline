@@ -163,6 +163,10 @@
     creates: /root/.oh-my-zsh
   become: true
   become_user: root
+  # root's login shell was just switched to zsh; under sudo in the minimal test
+  # container this corrupts the module's stdout. Skip only under Molecule.
+  tags:
+    - molecule-notest
 
 - name: Create custom plugin directory zsh-autosuggestions for root user
   ansible.builtin.file:
