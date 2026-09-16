@@ -1,0 +1,15 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: true
+  tasks:
+    # The role uses `become_user` to run per-user setup (e.g. Oh My ZSH).
+    # In the minimal test container sudo to a freshly-created, password-less
+    # account is rejected by PAM ("account management error"). Pre-create the
+    # test user with a usable password so become works. The role's user task
+    # does not manage passwords, so this stays idempotent and does not change
+    # behaviour on real hosts.
+    - name: Pre-create test user with a usable password for become
+      ansible.builtin.user:
+        name: test1
+        password: "{{ 'molecule' | password_hash('sha512') }}"
