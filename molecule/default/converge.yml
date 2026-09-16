@@ -11,6 +11,8 @@
         name: "thbe.rhel"
       vars:
         external_repos_epel: true
+        # Cockpit optional packages are absent from the minimal test container
+        cockpit_manage: false
     - name: "Include thbe.baseline"
       ansible.builtin.include_role:
         name: "thbe.baseline"
