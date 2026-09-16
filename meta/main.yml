@@ -9,7 +9,7 @@ galaxy_info:
   author: Thomas Bendler
   description: This role adds everything that makes life as a system administrator easier
   license: GPL-3.0-only
-  min_ansible_version: "2.9"
+  min_ansible_version: "2.16"
   platforms:
     - name: EL
       versions:
