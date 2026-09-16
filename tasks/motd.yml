@@ -4,7 +4,7 @@
     dest: /etc/motd
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
     content: ''
 
 - name: Deploy motd snippets to /etc/motd.d
@@ -13,7 +13,7 @@
     dest: /etc/motd.d
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   with_fileglob:
     - motd.d/*
 
@@ -23,7 +23,7 @@
     dest: /etc/issue.d
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   with_fileglob:
     - motd.d/*
 
@@ -36,4 +36,4 @@
     dest: /etc/motd.d/system_information
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"

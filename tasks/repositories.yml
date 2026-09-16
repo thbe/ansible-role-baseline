@@ -5,7 +5,7 @@
     dest: "{{ role_directory }}/keys/"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   with_fileglob:
     - keys/RPM-GPG-KEY-*
 
@@ -22,6 +22,6 @@
     dest: "{{ role_directory }}/rpms/"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   with_fileglob:
     - rpms/*.rpm
