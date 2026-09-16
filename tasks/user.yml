@@ -111,6 +111,10 @@
   loop: "{{ base_user }}"
   when:
     - base_user is defined
+  # sudo to an unprivileged account fails PAM account management inside the
+  # minimal test container; skip only this become_user task under Molecule.
+  tags:
+    - molecule-notest
 
 - name: Create custom plugin directory zsh-autosuggestions for local users
   ansible.builtin.file:
